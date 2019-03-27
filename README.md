@@ -1,25 +1,59 @@
 # test
 ## 多态polymorphism
-![image](https://github.com/chenk1993/token/blob/master/image/1.png)
+
+public class A {
+    public String show(D obj) {
+        return ("A and D");
+    }
+
+    public String show(A obj) {
+        return ("A and A");
+    }
+
+}
+
+public class B extends A{
+    public String show(B obj){
+        return ("B and B");
+    }
+    
+    public String show(A obj){
+        return ("B and A");
+    }
+}
+
+public class C extends B{
+
+}
+
+public class D extends B{
+
+}
+
+public class Test {
+    public static void main(String[] args) {
+        A a1 = new A();
+        A a2 = new B();
+        B b = new B();
+        C c = new C();
+        D d = new D();
+        
+        System.out.println("1--" + a1.show(b));
+        System.out.println("2--" + a1.show(c));
+        System.out.println("3--" + a1.show(d));
+        System.out.println("4--" + a2.show(b));
+        System.out.println("5--" + a2.show(c));
+        System.out.println("6--" + a2.show(d));
+        System.out.println("7--" + b.show(b));
+        System.out.println("8--" + b.show(c));
+        System.out.println("9--" + b.show(d));      
+    }
+}
+
 运行结果如下
 
-1--polymorphism.A and polymorphism.A
+![image](https://github.com/chenk1993/token/blob/master/image/1.png)
 
-2--polymorphism.A and polymorphism.A
-
-3--polymorphism.A and polymorphism.D
-
-4--polymorphism.B and polymorphism.A
-
-5--polymorphism.B and polymorphism.A
-
-6--polymorphism.A and polymorphism.D
-
-7--polymorphism.B and polymorphism.B
-
-8--polymorphism.B and polymorphism.B
-
-9--polymorphism.A and polymorphism.D
 
 
 在继承链中对象方法的调用存在一个优先级：this.show(O)、super.show(O)、this.show((super)O)、super.show((super)O)。
