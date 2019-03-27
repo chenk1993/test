@@ -52,7 +52,7 @@ public class Test {
 
 运行结果如下
 
-![image](https://github.com/chenk1993/token/blob/master/image/1.png)
+![image](https://github.com/chenk1993/test/blob/master/src/image/1.png)
 
 
 
