@@ -1,5 +1,6 @@
 # test
 ## 多态polymorphism
+![image](https://github.com/chenk1993/token/blob/master/image/1.png)
 运行结果如下
 
 1--polymorphism.A and polymorphism.A
