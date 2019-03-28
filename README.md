@@ -77,7 +77,7 @@ Static Nested Class是被声明为静态（static）的内部类，它可以不�
 不要在 foreach 循环里进行元素的 remove/add 操作。remove 元素请使用 Iterator
 方式，如果并发操作，需要对 Iterator 对象加锁
 
-![image](https://github.com/chenk1993/test/blob/master/src/image/4.png)
+
 ![image](https://github.com/chenk1993/test/blob/master/src/image/5.png)
 
 从异常信息可以发现，异常出现在checkForComodification()方法中。
@@ -291,6 +291,10 @@ final void checkForComodification() {
 如果modCount不等于expectedModCount，则抛出ConcurrentModificationException异常。
 很显然，此时modCount为1，而expectedModCount为0，因此程序就抛出了ConcurrentModificationException异常。
 关键点就在于：调用list.remove()方法导致modCount和expectedModCount的值不一致。
+
+![image](https://github.com/chenk1993/test/blob/master/src/image/4.png)
+
+注意，像使用for-each进行迭代实际上也会出现这种问题。
 
 ![image](https://github.com/chenk1993/test/blob/master/src/image/6.png)
 
