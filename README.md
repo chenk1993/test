@@ -73,7 +73,7 @@ Static Nested Class是被声明为静态（static）的内部类，它可以不�
 使用str=str+"hello"每次循环都会 new 出一个 StringBuilder 对象，
 然后进行 append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。
 
-## 元素的 remove/add 操作
+## 元素的 remove 操作
 不要在 foreach 循环里进行元素的 remove/add 操作。remove 元素请使用 Iterator
 方式，如果并发操作，需要对 Iterator 对象加锁
 
