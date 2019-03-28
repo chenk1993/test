@@ -57,3 +57,18 @@ public class Test {
 
 
 在继承链中对象方法的调用存在一个优先级：this.show(O)、super.show(O)、this.show((super)O)、super.show((super)O)。
+
+
+## 内部类
+
+
+![image](https://github.com/chenk1993/test/blob/master/src/image/2.png)
+
+Static Nested Class是被声明为静态（static）的内部类，它可以不依赖于外部类实例被实例化。而通常的内部类需要在外部类实例化后才能实例化。
+
+## 循环体内，字符串的连接方式
+
+![image](https://github.com/chenk1993/test/blob/master/src/image/3.png)
+
+使用str=str+"hello"每次循环都会 new 出一个 StringBuilder 对象，
+然后进行 append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。
