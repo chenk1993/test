@@ -79,6 +79,7 @@ Static Nested Class是被声明为静态（static）的内部类，它可以不�
 
 ![image](https://github.com/chenk1993/test/blob/master/src/image/4.png)
 ![image](https://github.com/chenk1993/test/blob/master/src/image/5.png)
+
 从异常信息可以发现，异常出现在checkForComodification()方法中。
 
 　　我们不忙看checkForComodification()方法的具体实现，我们先根据程序的代码一步一步看ArrayList源码的实现：
@@ -90,6 +91,7 @@ public Iterator<E> iterator() {
     return new Itr();
     
 }
+
  　　从这段代码可以看出返回的是一个指向Itr类型对象的引用，我们接着看Itr的具体实现，在AbstractList类中找到了Itr类的具体实现，它是AbstractList的一个成员内部类，下面这段代码是Itr类的所有实现：
 
 private class Itr implements Iterator<E> {
@@ -164,6 +166,7 @@ private class Itr implements Iterator<E> {
     }
     
 }
+
  　　首先我们看一下它的几个成员变量：
  
 　　cursor：表示下一个要访问的元素的索引，从next()方法的具体实现就可看出
@@ -187,6 +190,7 @@ public boolean hasNext() {
     return cursor != size();
     
 }
+
  　 如果下一个访问的元素下标不等于ArrayList的大小，就表示有元素需要访问，这个很容易理解，如果下一个访问元素的下标等于ArrayList的大小，则肯定到达末尾了。
 　　
     然后通过Iterator的next()方法获取到下标为0的元素，我们看一下next()方法的具体实现：
@@ -267,7 +271,7 @@ private void fastRemove(int index) {
 }
 
  　 通过remove方法删除元素最终是调用的fastRemove()方法，在fastRemove()方法中，首先对modCount进行加1操作（因为对集合修改了一次），然后接下来就是删除元素的操作，最后将size进行减1操作，并将引用置为null以方便垃圾收集器进行回收工作。
- 
+
 　　那么注意此时各个变量的值：对于iterator，其expectedModCount为0，cursor的值为1，lastRet的值为0。
 
 　　对于list，其modCount为1，size为0。
@@ -285,11 +289,14 @@ final void checkForComodification() {
     throw new ConcurrentModificationException();
     
 }
+
  　 如果modCount不等于expectedModCount，则抛出ConcurrentModificationException异常。
 　　很显然，此时modCount为1，而expectedModCount为0，因此程序就抛出了ConcurrentModificationException异常。
 　　到这里，想必大家应该明白为何上述代码会抛出ConcurrentModificationException异常了。
 　　关键点就在于：调用list.remove()方法导致modCount和expectedModCount的值不一致。
+
 ![image](https://github.com/chenk1993/test/blob/master/src/image/6.png)
+
 在Itr类中也给出了一个remove()方法：
 
 public void remove() {
@@ -319,6 +326,7 @@ public void remove() {
     }
     
 }
+
     在这个方法中，删除元素实际上调用的就是list.remove()方法，但是它多了一个操作：
 
     expectedModCount = modCount;
